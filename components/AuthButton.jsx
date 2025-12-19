@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
-// import { signOut } from "@/app/actions";
-import { AuthModel } from "./AuthModel";
+import { signOut } from "@/app/actions";
+import AuthModel from "./AuthModel";
 import { Button } from "@/components/ui/button";
 import { LogIn, LogOut } from "lucide-react";
-import { signOut } from "@/app/actions";
 
 export default function AuthButton({ user }) {
   const [showAuthModel, setShowAuthModel] = useState(false);

@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 📉 DealDrop – Smart Price Tracking Platform
 
-## Getting Started
+DealDrop is a smart price tracking web platform that allows users to monitor product prices, visualize historical price trends, and receive instant email alerts when a price drop is detected. It helps users make informed purchasing decisions by automating price monitoring and notifications.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Features
+
+- 🔐 Google Authentication using Supabase
+- 🔗 Add products using product URLs
+- 🕷️ Automated product price crawling via FireCrawl
+- ⏰ Daily price checks using Supabase Cron Jobs
+- 📉 Automatic price drop detection
+- 📬 Email alerts using MailerSend
+- 📊 Interactive price history charts using Recharts
+- 📱 Responsive and user-friendly UI
+
+---
+
+---
+
+## 🛠 Tech Stack
+
+### Framework
+- **Next.js** – Full-stack framework (Frontend + Backend)
+
+### Database & Authentication
+- **Supabase**
+  - PostgreSQL database
+  - Google OAuth authentication
+  - Row level Security (RLS)
+  - Built-in cron jobs
+
+### Web Crawling
+- **FireCrawl**
+  - Extracts product details and pricing data from URLs
+
+### Charts & Visualization
+- **Recharts**
+  - Interactive price history line charts
+
+### Email Service
+- **MailerSend**
+  - Sends automated price drop alerts
+
+### Deployment
+- **Vercel**
+
+---
+
+## 🧠 Application Flow
+
+1. User signs in using **Google Authentication**
+2. User adds a product by submitting its **product URL**
+3. Product details and initial price are fetched using **FireCrawl**
+4. Product data is stored in **Supabase**
+5. **Supabase Cron Job** runs daily:
+   - Crawls product pages
+   - Stores new price entries
+   - Compares old and new prices
+6. Price history is visualized using **Recharts**
+7. If a **price drop is detected**, an email alert is sent via **MailerSend**
+
+
+---
+
+## 📋 Prerequisites
+
+### Before you begin, ensure you have:
+
+- Node.js 18+ installed
+- A [Supabase](https://supabase.com/) account
+- A [Firecrawl](https://www.firecrawl.dev/) account
+- A [Mailersend](https://app.mailersend.com/) account
+- Google OAuth credentials from [Google Cloud Console](https://console.cloud.google.com/apis/credentials)
+
+---
+
+## Environment variables
+
 ```
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Firecrawl
+FIRECRAWL_API_KEY=your_firecrawl_api_key
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+# MailerSend
+MAILERSEND_API_KEY=your_mailersend_api_key
+MAILERSEND_FROM_EMAIL=your_verified_sender_email
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Cron Job Security (generate with: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))")
+CRON_SECRET=your_generated_cron_secret
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# App URL
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
